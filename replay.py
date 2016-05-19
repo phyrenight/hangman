@@ -1,25 +1,5 @@
 import random
-from hangman import main
 
-
-def play_again():
-    """
-        If a valid response is give, it returns
-        a string.If an invalid input is given,
-        an invalid input message is given to the user.
-    """
-    answer = raw_input("would you like to play again?[y/n]").lower()
-    if answer == 'y' or answer == 'n':
-        if answer == 'y':
-            hangman.main()
-        elif answer == 'n':
-            print "Thank you for playing"
-            return 6
-        else:
-            print "Invalid input .... Thank you for playing?"
-            return 6
-    else:
-        print" Invalid input of %s" % answer
 
 
 def gallows(wrong_guess_count):
@@ -100,19 +80,21 @@ def gallows(wrong_guess_count):
         print"|    |"
 
 
-def Getword(word_list):
+def getWord():
     """
         Takes one input and returns 2.
         Uses a random number to pick a
         word from the word list.
     """
+    word_list = ["time", "travel", "people", "fart",
+             "town", ]
     index_number = random.randrange(len(word_list))
     print word_list[index_number]
     word = "*"*len(word_list[index_number])
-    return word, index_number
+    return word, word_list[index_number]
 
 
-def match(userguess, word, hidden_word):
+def match(user_guess, word, hidden_word):
     """
         Takes 3 inputs and returns 2.Checks
         user's guess against each letter
@@ -126,7 +108,7 @@ def match(userguess, word, hidden_word):
     for items in hidden_word:
         middle_man.append(items)
     while i < len(hidden_word):
-        if userguess == word[i]:
+        if user_guess == word[i]:
             middle_man[i] = word[i]
             count += 1
         i += 1
@@ -139,13 +121,13 @@ def match(userguess, word, hidden_word):
         return 1, hidden_word
 
 
-def wordsMatch(word, wordtoGuess):
+def wordsMatch(word, word_to_Guess):
     """
         Takes two inputs.
         Compares the hidden word with original word
         returns true if the words match or false if they don't
     """
-    if word == wordtoGuess:
+    if word == word_to_Guess:
         return True
     else:
         return False
